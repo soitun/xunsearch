@@ -9,7 +9,7 @@
  * 功能。合并的主要目的是便于拷贝，只要复制这个库文件即可，而不用拷贝一
  * 大堆文件。详细文档请阅读 {@link:http://www.xunsearch.com/doc/php/}
  * 
- * 切勿手动修改本文件！生成时间：2011/09/07 17:31:39 
+ * 切勿手动修改本文件！生成时间：2011/09/08 11:23:51 
  *
  * @author hightman
  * @link http://www.xunsearch.com/
@@ -200,7 +200,10 @@ class XSErrorException extends XSException
 	{
 		$this->_file = $file;
 		$this->_line = $line;
-		parent::__construct($message, $code, $previous);
+		if (version_compare(PHP_VERSION, '5.3.0', '>='))
+			parent::__construct($message, $code, $previous);
+		else
+			parent::__construct($message, $code);
 	}
 	public function __toString()
 	{
@@ -357,6 +360,7 @@ class XS extends XSComponent
 	private function loadIniFile($file)
 	{
 		$cache = false;
+		$pfunc = 'parse_ini_file';
 		if (strlen($file) < 255 && file_exists($file))
 		{
 			$cache_key = md5(__CLASS__ . '::ini::' . realpath($file));
@@ -382,12 +386,15 @@ class XS extends XSComponent
 				$this->_config = $cache['config'];
 				return;
 			}
-			$this->_config = parse_ini_file($file, true, INI_SCANNER_RAW);
 		}
 		else
 		{
-			$this->_config = parse_ini_string($file, true, INI_SCANNER_RAW);
+			$pfunc = 'parse_ini_string';
 		}
+		$pargs = array($file, true);		
+		if (version_compare(PHP_VERSION, '5.3.0', '>='))
+			$pargs[] = INI_SCANNER_RAW;
+		$this->_config = call_user_func_array($pfunc, $pargs);
 		if ($this->_config === false)
 			throw new XSException('Failed to parse project config file/string: `' . substr($file, 0, 10) . '...\'');
 		$scheme = new XSFieldScheme;

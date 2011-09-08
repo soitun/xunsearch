@@ -139,7 +139,7 @@ else
   echo "Extracting scws dict file ... "
   do_install=yes
 fi
-if test "$up_dict" = "yes" ; then
+if test "$do_install" = "yes" ; then
   tar -xjf $new_dict -C $prefix/etc
   touch $old_dict
 fi

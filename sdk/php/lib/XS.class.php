@@ -127,7 +127,10 @@ class XSErrorException extends XSException
 	{
 		$this->_file = $file;
 		$this->_line = $line;
-		parent::__construct($message, $code, $previous);
+		if (version_compare(PHP_VERSION, '5.3.0', '>='))
+			parent::__construct($message, $code, $previous);
+		else
+			parent::__construct($message, $code);
 	}
 
 	/**
@@ -469,6 +472,7 @@ class XS extends XSComponent
 	{
 		// check cache
 		$cache = false;
+		$pfunc = 'parse_ini_file';
 		if (strlen($file) < 255 && file_exists($file))
 		{
 			$cache_key = md5(__CLASS__ . '::ini::' . realpath($file));
@@ -495,16 +499,18 @@ class XS extends XSComponent
 				$this->_config = $cache['config'];
 				return;
 			}
-			// parse ini file
-			$this->_config = parse_ini_file($file, true, INI_SCANNER_RAW);
 		}
 		else
 		{
 			// parse ini string
-			$this->_config = parse_ini_string($file, true, INI_SCANNER_RAW);
+			$pfunc = 'parse_ini_string';
 		}
 
-		// parse ini file		
+		// parse ini file
+		$pargs = array($file, true);		
+		if (version_compare(PHP_VERSION, '5.3.0', '>='))
+			$pargs[] = INI_SCANNER_RAW;
+		$this->_config = call_user_func_array($pfunc, $pargs);
 		if ($this->_config === false)
 			throw new XSException('Failed to parse project config file/string: `' . substr($file, 0, 10) . '...\'');
 

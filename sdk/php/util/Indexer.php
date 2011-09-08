@@ -182,7 +182,6 @@ try
 					$data = csv_transform($data);
 					if (is_null($data))
 						continue;
-					print_r($data);
 				}
 
 				$doc->setFields($data);
