@@ -43,7 +43,7 @@ echo "Please specify the installation directory"
 echo "请指定安装目录 (默认为中括号内的值)"
 echo -n "[$def_prefix]:"
 while test -z ""; do
-  read set_prefix
+  read -e set_prefix
   if test -z "$set_prefix" ; then
     set_prefix=$def_prefix
   fi

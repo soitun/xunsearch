@@ -39,6 +39,7 @@ Quest - 搜索查询和测试工具 ($version)
                  如果指定的是名称，则使用 ../app/<name>.ini 作为配置文件
     --query=<query>	
     -q <query>   指定要搜索的查询语句，如果语句中包含空格请用使用双引号包围起来
+    --fuzzy      将搜索默认设为模糊搜索	
     --charset=<gbk|utf-8>
     -c <charset> 指定您当前在用的字符集，以便系统进行智能转换
     --db=<name[,name2 ...]>
@@ -157,6 +158,10 @@ try
 	}
 	else
 	{
+		// fuzzy search
+		if (XSUtil::getOpt(null, 'fuzzy') !== null)
+			$search->setFuzzy();
+		
 		if (($pos = strpos($limit, ',')) === false)
 			$offset = 0;
 		else
