@@ -21,6 +21,7 @@ src/xs-searchd
 src/xs-import
 src/xs-logging
 src/user_mm.c
+sdk/php/lib/XS.php
 *.o
 *.lo
 .libs
