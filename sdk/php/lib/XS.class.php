@@ -507,9 +507,7 @@ class XS extends XSComponent
 		}
 
 		// parse ini file
-		$pargs = array($file, true);		
-		if (version_compare(PHP_VERSION, '5.3.0', '>='))
-			$pargs[] = INI_SCANNER_RAW;
+		$pargs = array($file, true);
 		$this->_config = call_user_func_array($pfunc, $pargs);
 		if ($this->_config === false)
 			throw new XSException('Failed to parse project config file/string: `' . substr($file, 0, 10) . '...\'');
