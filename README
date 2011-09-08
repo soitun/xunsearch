@@ -12,10 +12,9 @@ Xunsearch （中文名：迅搜）是一套免费开源的专业中文全文检�
 的全文搜索引擎，适用于 MySQL 数据库全文检索、web站内/论坛搜索、行业门户/垂直搜索、
 文档/文献检索等各种领域。
 
-Xunsearch 底层采用 C/C++ 编写，索引设计基于著名而悠久的 [Xapian](http://xapian.org)，
-分词采用自主研发同样也是开源的 [SCWS分词](http://www.ftphp.com/scws/)，两者完美
-结合，理论上单个搜索库支持 40 亿条记录。可编译运行于 Linux/FreeBSD 等各种 UNIX 
-类型的系统。
+Xunsearch 底层采用 C/C++ 编写，索引设计基于著名而悠久的 [Xapian][1]，分词采用
+自主研发同样也是开源的 [SCWS分词][2]，两者完美结合，理论上单个搜索库支持 40 亿条
+记录。可编译运行于 Linux/FreeBSD 等各种 UNIX 类型的系统。
 
 Xunsearch devkit SDK 理论上支持各种包含 socket 实现的脚本语言，目前我们只提供 
 PHP 的实现方式，其它脚本的 SDK 往后会陆续考虑和开发，也欢迎有能力开发的人加入或
@@ -59,3 +58,7 @@ SDK 开发文档
 如果您需要构建专业大规模数据的搜索引擎，需要进行分布式架构和设计，我们也提供这项服务。
 
 具体请访问我们的支持页面：<http://www.xunsearch.com/support/>
+
+
+[1]: http://xapian.org/
+[2]: http://www.ftphp.com/scws/

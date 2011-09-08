@@ -29,7 +29,7 @@ $Id$
     
     > $prefix/sdk/php/README
     > $prefix/sdk/php/doc/
-    > 推荐在线阅读我们的文档：http://www.xunsearch.com/docs/php/
+    > 推荐在线阅读我们的文档：<http://www.xunsearch.com/doc/>
 
 
 安全须知
@@ -70,7 +70,7 @@ xunsearch-full/
 
 Xunsearch 基于 GPL 许可证免费开源发布，附加要求是希望每一个使用 xunsearch 
 构建的搜索引擎应用，在底部或其它位置保留 Powered by xunsearch 的宣告，同时
-链接到我们的官网地址：http://www.xunsearch.com ，关于 xunsearch 详细授权
+链接到我们的官网地址：<http://www.xunsearch.com> ，关于 xunsearch 详细授权
 说明请参见源码目录下的 COPYING 文件。
 
 软件包中包含的其它依赖或组件则保持其原有的方式授权，著作权也归原始作者所有。
