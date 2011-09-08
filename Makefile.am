@@ -28,6 +28,7 @@ dist-full: dist-bzip2
 	mv xunsearch-*.tar.bz2 xunsearch-full/packages
 	tar -cjf xunsearch-full-latest.tar.bz2 xunsearch-full
 	scp xunsearch-full-latest.tar.bz2 xunsearch:./web/download
+	scp VERSION xunsearch:./web/protected/data
 	rm -f xunsearch-full-latest.tar.bz2
 	
 web-doc:
