@@ -32,7 +32,7 @@ php-web-doc:
 	@rm -rf php/doc/api
 	@php php/dev/build.php api online > /dev/null 2>&1
 	@echo "Making tar ball ..."
-	@tar -cjf ../xunsearch-web-doc-latest.tar.bz2 -C php doc/api doc/guide
+	@tar -cjf ../xunsearch-web-doc-latest.tar.bz2 -C php doc/
 	@echo "Regenerating offline API reference ..."
 	@rm -rf php/doc/api	
 	@php php/dev/build.php api offline > /dev/null 2>&1	

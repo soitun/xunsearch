@@ -14,7 +14,7 @@ require_once dirname(__FILE__) . '/XSUtil.class.php';
 require_once dirname(__FILE__) . '/XSDataSource.class.php';
 
 // check arguments
-ini_set('memory_limit', '1024M');
+//ini_set('memory_limit', '1024M');
 XSUtil::parseOpt(array('p', 'c', 'd', 'project', 'charset', 'db', 'source', 'file', 'sql', 'csv-delimiter'));
 $project = XSUtil::getOpt('p', 'project', true);
 

@@ -27,4 +27,4 @@
 	<?php endif; ?>
 </div>
 <?php endif; ?>
-
+<div class="clear"></div>

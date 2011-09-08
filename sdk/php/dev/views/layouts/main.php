@@ -115,7 +115,29 @@ div.clear { clear: both; float: none; height: 0; line-height: 0; }
 .markdown h2:hover .anchor, .markdown h3:hover .anchor, .markdown h4:hover .anchor {
     visibility: visible;
 }
-
+.markdown .image {
+    border: 1px solid #E5E5E5;
+    margin: 1em 0;
+    text-align: center;
+}
+.markdown .image > p {
+    background: none repeat scroll 0 0 #F5F5F5;
+    margin: 0;
+    padding: 0.5em;
+    text-align: center;
+}
+.markdown .image img {
+    margin: 1em;
+}
+table.download { width: 100%; }
+.download th, .download td {
+    border: 1px solid #DDDDDD;
+    padding: 0.2em 0.5em;
+}
+.download th {
+    background: none repeat scroll 0 0 #EEEEEE;
+    text-align: left;
+}
 </style>
 </head>
 <body>

@@ -54,9 +54,10 @@ EOF;
 		$input = $this->root . '/lib';
 		$output = $this->root . '/doc';
 		$themePath = dirname(__FILE__) . '/api';
+		$vfile = $this->root . '/../../VERSION';
 
 		include_once $input . '/xs_cmd.inc.php';
-		$this->version = PACKAGE_VERSION;
+		$this->version = file_exists($vfile) ? trim(file_get_contents($vfile)) : PACKAGE_VERSION;
 		$this->pageTitle = 'API 文档参考 (Xunsearch/PHP-SDK)';
 		$this->baseSourcePath = dirname(dirname(($this->root)));
 
