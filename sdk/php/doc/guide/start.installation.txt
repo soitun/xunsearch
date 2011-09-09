@@ -132,7 +132,38 @@ rm -fr $prefix
 ~~~
 
 
-[1]: https://github.com/hightman/xunsearch/blob/master/             "Xunsearch 在 github 上的代码仓库"
+从 Git 源码仓库安装
+------------------
+
+> note: 在开始安装前，无论如何请先安装一次最新发布的完整版本，以便将所有的运行依赖库安装到位。
+
+我们的源代码托管在 github 上。您可以直接[浏览代码仓库][1]，也可以通过以下方式之一取得源代码：
+
+~~~
+git clone git://github.com/hightman/xunsearch.git
+git clone https://github.com/hightman/xunsearch.git
+~~~
+
+如果要编译安装这份源代码，您还必须在主机环境上安装相关的 autoconf, automake 工具，然后运行
+下面指令完成准备工作。
+
+~~~
+cd xunsearch/
+chmod +x acprep
+./acprep
+~~~
+
+在完成上述的准备工作后，接下来编译安装 xunsearch 就和常见的开源软件类似，假设您的安装目录为 
+`$prefix`，然后按以下步骤操作即可：
+
+~~~
+./configure --prefix=$prefix
+make
+make install
+~~~
+
+
+[1]: https://github.com/hightman/xunsearch/                         "Xunsearch 在 github 上的代码仓库"
 [2]: http://www.xunsearch.com/download/xunsearch-full-latest.tar.gz "Xunsearch 最新的完整安装包" 
 
 <div class="revision">$Id$</div>
