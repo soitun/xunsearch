@@ -27,12 +27,7 @@ xs_searchd_SOURCES += mcache.c md5.c
 endif HAVE_MEMORY_CACHE
 xs_searchd_LDADD = -levent -lxapian -lscws
 
-EXTRA_DIST = gen-phpinc.sh xs-ctl.sh.in xs-optimize.sh.in
-
-noinst_DATA = xs_cmd.inc.php
-
-xs_cmd.inc.php: xs_cmd.h ../config.h
-	sh gen-phpinc.sh $^ > $@
+EXTRA_DIST = xs-ctl.sh.in xs-optimize.sh.in
 
 user_mm.c: user.c
 	$(COMPILE) -DHAVE_MM -E $^ > $@

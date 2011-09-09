@@ -11,9 +11,12 @@ phpapp_DATA = php/app/demo.ini
 phplib_DATA = php/lib/XS.php
 phplib_FILES = php/lib/*.class.php
 
-EXTRA_DIST = php/README php/doc php/app/demo.ini php/lib/XS.php php/util
+EXTRA_DIST = gen-phpinc.sh php/README php/doc php/app/demo.ini php/lib/XS.php php/util
 
-php/lib/XS.php: $(phplib_FILES)
+php/lib/xs_cmd.inc.php: ../config.h ../src/xs_cmd.h
+	sh gen-phpinc.sh > $@
+
+php/lib/XS.php: php/lib/xs_cmd.inc.php $(phplib_FILES)
 	@echo "Regenerating XS library class file ..."
 	@php php/dev/build.php lite > /dev/null 2>&1
 
@@ -24,9 +27,9 @@ dist-hook: ../etc/py.xdb
 	@echo "Regenerating XS library class file ..."
 	@php php/dev/build.php lite > /dev/null 2>&1	
 
-../etc/py.xdb:
+../etc/py.xdb: php/dev/data/py.txt
 	@echo "Generating pinyin dict by php ..."
-	@php php/dev/build.php pinyin make > /dev/null 2>&1
+	@php php/dev/build.php pinyin make > /dev/null 2>&1	
 	
 php-web-doc:
 	@echo "Regenerating online API reference ..."
