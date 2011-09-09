@@ -23,14 +23,12 @@ dist-hook:
 	sh version-sh > VERSION
 	
 dist-full: dist-bzip2
-	sh -c 'cd xunsearch-full ; ./setup.sh --clean'
-	rm -f xunsaerch-full/packages/xunsearch-*
-	mv xunsearch-*.tar.bz2 xunsearch-full/packages
-	tar -cjf xunsearch-full-latest.tar.bz2 xunsearch-full
-	scp xunsearch-full-latest.tar.bz2 xunsearch:./web/download
-	scp VERSION xunsearch:./web/protected/data
-	rm -f xunsearch-full-latest.tar.bz2
-	
+	sh -c 'cd xunsearch-full ; ./setup.sh --clean'	
+	rm -f xunsearch-full/packages/xunsearch-*
+	mv $(distdir).tar.bz2 xunsearch-full/packages
+	@echo "Running distribute script ..."
+	@sh dist-sh
+
 web-doc:
 	cd sdk && make php-web-doc
 	scp xunsearch-web-doc-latest.tar.bz2 xunsearch:./web/protected/data

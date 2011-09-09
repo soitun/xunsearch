@@ -461,6 +461,40 @@ class XS extends XSComponent
 		}
 		return $data;
 	}
+	
+	/**
+	 * 解析INI配置文件
+	 * 由于 PHP 自带的 parse_ini_file 存在一些不兼容，故自行简易实现
+	 * @param string $data 文件内容
+	 * @return array 解析后的结果
+	 */
+	private function parseIniData($data)
+	{
+		$ret = array();
+		$cur = &$ret;
+		$lines  = explode("\n", $data);
+		foreach ($lines as $line)
+		{
+			if ($line[0] == ';' || $line[0] == '#')
+				continue;
+			$line = trim($line);
+			if ($line === '')
+				continue;
+			if ($line[0] === '[' && substr($line, -1, 1) === ']')
+			{
+				$sec = substr($line, 1, -1);
+				$ret[$sec] = array();
+				$cur = &$ret[$sec];
+				continue;
+			}
+			if (($pos = strpos($line, '=')) === false)
+				continue;
+			$key = trim(substr($line, 0, $pos));
+			$value = trim(substr($line, $pos + 1), " '\t\"");
+			$cur[$key] = $value;			
+		}
+		return $ret;
+	}
 
 	/**
 	 * 加载项目配置文件
@@ -472,7 +506,6 @@ class XS extends XSComponent
 	{
 		// check cache
 		$cache = false;
-		$pfunc = 'parse_ini_file';
 		if (strlen($file) < 255 && file_exists($file))
 		{
 			$cache_key = md5(__CLASS__ . '::ini::' . realpath($file));
@@ -499,18 +532,18 @@ class XS extends XSComponent
 				$this->_config = $cache['config'];
 				return;
 			}
+			$data = file_get_contents($file);
 		}
 		else
 		{
 			// parse ini string
-			$pfunc = 'parse_ini_string';
+			$data = $file;
 		}
 
 		// parse ini file
-		$pargs = array($file, true);
-		$this->_config = call_user_func_array($pfunc, $pargs);
+		$this->_config = $this->parseIniData($data);
 		if ($this->_config === false)
-			throw new XSException('Failed to parse project config file/string: `' . substr($file, 0, 10) . '...\'');
+			throw new XSException('Failed to parse project config file/string: \'' . substr($file, 0, 10) . '...\'');
 
 		// create the scheme object
 		$scheme = new XSFieldScheme;

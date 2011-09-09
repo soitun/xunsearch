@@ -9,10 +9,11 @@ phplibdir = ${phpdir}/lib
 
 phpapp_DATA = php/app/demo.ini
 phplib_DATA = php/lib/XS.php
+phplib_FILES = php/lib/*.class.php
 
 EXTRA_DIST = php/README php/doc php/app/demo.ini php/lib/XS.php php/util
 
-php/lib/XS.php:
+php/lib/XS.php: $(phplib_FILES)
 	@echo "Regenerating XS library class file ..."
 	@php php/dev/build.php lite > /dev/null 2>&1
 

@@ -1,7 +1,13 @@
 #!/bin/sh
+# $Id$
 # Generate VERSION file
-#
-if test -d ".git" ; then
+
+# package version
+version=`cat config.h | grep PACKAGE_VERSION | cut -d \" -f 2`
+devel=`echo $version | grep "dev$"`
+
+# check git version, devel version
+if test -d ".git" && ! test -z "$devel" ; then
   branch=`git branch | grep ^\* | cut -d ' ' -f 2` 
   if test "$branch" = "master" ; then
     version=`git describe 2> /dev/null`
@@ -18,8 +24,7 @@ if test -d ".git" ; then
     last=`git log -1 --pretty='format:%h'`
     version="$next-$branch-g$last"
   fi
-else
-  version=`cat config.h | grep PACKAGE_VERSION | cut -d \" -f 2`
 fi
-echo $version
 
+# output the version
+echo $version
