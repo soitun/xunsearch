@@ -292,6 +292,9 @@ AC_CHECK_LIB(pthread,
 	]
 )
 
+# Has sdk dev files?
+AM_CONDITIONAL([HAVE_SDK_PHP_DEV], [test -d sdk/php/dev])
+
 # Checks for header files.
 AC_CHECK_HEADERS([arpa/inet.h fcntl.h limits.h netinet/in.h stdlib.h string.h strings.h sys/param.h sys/socket.h sys/time.h unistd.h])
 

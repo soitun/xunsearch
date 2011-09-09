@@ -9,14 +9,18 @@ phplibdir = ${phpdir}/lib
 
 phpapp_DATA = php/app/demo.ini
 phplib_DATA = php/lib/XS.php
-phplib_FILES = php/lib/*.class.php
+phplib_FILES = 
+
+if HAVE_SDK_PHP_DEV
+phplib_FILES += php/lib/xs_cmd.inc.php php/lib/*.class.php
+endif HAVE_SDK_PHP_DEV
 
 EXTRA_DIST = gen-phpinc.sh php/README php/doc php/app/demo.ini php/lib/XS.php php/util
 
 php/lib/xs_cmd.inc.php: ../config.h ../src/xs_cmd.h
 	sh gen-phpinc.sh > $@
 
-php/lib/XS.php: php/lib/xs_cmd.inc.php $(phplib_FILES)
+php/lib/XS.php: $(phplib_FILES)
 	@echo "Regenerating XS library class file ..."
 	@php php/dev/build.php lite > /dev/null 2>&1
 
